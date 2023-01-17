@@ -15,6 +15,7 @@ app.use(express.json());
 app.use(cors());
 // Models
 const User = require('./models/User');
+const client = require('./controllers/client')
 
 app.get("/", (req: Request, res: Response) => {
   return res.status(200).json({ message: "Está rodando" });
@@ -154,12 +155,22 @@ app.get('/randomdog', async function (req: Request, res: Response) {
   res.set('Content-Type', 'application/json');
   res.send({ message: filteredDogs[randomNum] });
 });
+
+
+app.post('/createClient', client.createUser);
+app.get('/getClients', client.getUsers);
+app.post('/getClientById', client.getUser);
+app.post('/updateClient', client.updateUser);
+app.post('/deleteClient', client.deleteUser);
+
+
+
 // DB_USER=PauloVictor
 // DB_PASS=Yhz6TmPZD920UFEz
 // SECRET=FA8SH8FAH8FA8H8R213FG40G480FQH80FG80HWT435AWE
 // Credenciais
-const dbUser = process.env.DB_USER;
-const dbPass = process.env.DB_PASS;
+const dbUser = 'PauloVictor' || process.env.DB_USER;
+const dbPass = 'Yhz6TmPZD920UFEz' || process.env.DB_PASS;
 
 mongoose
   .connect(
