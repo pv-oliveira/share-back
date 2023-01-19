@@ -43,7 +43,7 @@ function checkToken(req: Request, res: Response, next: NextFunction) {
   if (!token) return res.status(401).json({ message: "access denied"});
 
   try {
-    const secret = process.env.SECRET
+    const secret = "FA8SH8FAH8FA8H8R213FG40G480FQH80FG80HWT435AWE"
     
     jwt.verify(token, secret)
 
@@ -115,7 +115,7 @@ app.post("/auth/login", async (req:Request, res: Response) => {
   if (!checkPassword) return res.status(422).json({message: "invalid password"})
 
   try {
-    const secret = process.env.SECRET
+    const secret = "FA8SH8FAH8FA8H8R213FG40G480FQH80FG80HWT435AWE"
 
     const token = jwt.sign(
       {
@@ -131,6 +131,23 @@ app.post("/auth/login", async (req:Request, res: Response) => {
 
   }
    
+})
+
+// validate
+app.post('/validate', async (req: Request, res: Response) => {
+  const { token } = req.body.token
+console.log(token)
+  try {
+    const secret = "FA8SH8FAH8FA8H8R213FG40G480FQH80FG80HWT435AWE"
+
+    const tokenValidation = jwt.verify(token, secret)
+    console.log(tokenValidation)
+    return res.status(200).send(true)
+
+  } catch (error) {
+    res.status(500).json({message: 'unable to validate token'})
+
+  }
 })
 
 // cat
