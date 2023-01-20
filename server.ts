@@ -135,12 +135,12 @@ app.post("/auth/login", async (req:Request, res: Response) => {
 
 // validate
 app.post('/validate', async (req: Request, res: Response) => {
-  const { token } = req.body.token
-console.log(token)
+  const { storageToken } = req.body.storageToken
+console.log(storageToken)
   try {
     const secret = "FA8SH8FAH8FA8H8R213FG40G480FQH80FG80HWT435AWE"
 
-    const tokenValidation = jwt.verify(token, secret)
+    const tokenValidation = jwt.verify(storageToken, secret)
     console.log(tokenValidation)
     return res.status(200).send(true)
 

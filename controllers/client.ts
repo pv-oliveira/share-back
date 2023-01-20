@@ -46,7 +46,7 @@ export const getUser = (req: Request, res: Response) => {
 
 // Update a user
 export const updateUser = (req: Request, res: Response) => {
-  Client.findByIdAndUpdate(req.params.id, req.body, { new: true })
+  Client.findByIdAndUpdate(req.body._id, req.body, { new: true })
     .then((user: any) => {
       if (!user) {
         return res.status(404).send({ message: 'User not found' });
@@ -63,7 +63,7 @@ export const updateUser = (req: Request, res: Response) => {
 
 // Delete a user
 export const deleteUser = (req: Request, res: Response) => {
-  Client.findByIdAndRemove(req.params.id)
+  Client.findByIdAndRemove(req.body.id)
     .then((user: any) => {
       if (!user) {
         return res.status(404).send({ message: 'User not found' });
